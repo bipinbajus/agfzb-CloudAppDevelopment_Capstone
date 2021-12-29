@@ -35,7 +35,7 @@
               {% if user.is_authenticated %}
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin/account">({{user.first_name}})</a>
+                    <a class="nav-link" href="#">({{user.first_name}})</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'djangoapp:logout' %}">Logout</a>
@@ -44,8 +44,8 @@
               {% else %}
                 <form class="form-inline" action="{% url 'djangoapp:login' %}"  method="post">
                     {% csrf_token %}
-                    <input required class="form-control mr-sm-2" type="text" name="username" placeholder="Username" aria-label="Username">
-                    <input required class="form-control mr-sm-2" type="password" name="password" placeholder="Password" aria-label="Password">
+                    <input required class="form-control mr-sm-2" type="text" name="username" value="bipin" placeholder="Username" aria-label="Username">
+                    <input required class="form-control mr-sm-2" type="password" name="password" value="bipin" placeholder="Password" aria-label="Password">
                     
                     <button class="btn btn-primary my-2 my-sm-0" type="submit">Login</button>
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">SignUp</button>
