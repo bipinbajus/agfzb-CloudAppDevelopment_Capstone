@@ -67,7 +67,7 @@
     {% endif %}
 
     {% if dealerByState %}
-    <ul>
+        <ul>
         {% for dealer in dealerByState %}
             <div>
                 {{ dealer.full_name }} - {{ dealer.st }}            
@@ -75,6 +75,16 @@
         {% endfor %}
         </ul>
         {% endif %}
+
+    {% if dealerReviewById %}
+    <ul>
+        {% for review in dealerReviewById %}
+            <div>
+                {{ review.review }} - {{ review.name }}            
+            </div>
+        {% endfor %}
+        </ul>
+    {% endif%}
 
     </body>
 
