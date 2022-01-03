@@ -55,6 +55,18 @@
    
 
     <!--Add a dealer table here -->
+    {% if dealerships %}
+    
+    <ul>
+    {% for dealer in dealerships %}
+        <div>
+            {{ dealer }}            
+        </div>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p>No courses are available.</p>
+    {% endif %}
 
     </body>
 
