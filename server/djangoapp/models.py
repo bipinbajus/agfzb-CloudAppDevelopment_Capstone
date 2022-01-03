@@ -59,6 +59,9 @@ class CarDealer:
         # Dealer zip
         self.zip = zip
 
+    def getAllData(self):
+        return self
+
     def __str__(self):
         return "Dealer name: " + self.full_name
 

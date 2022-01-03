@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, render, redirect
 # from .models import related models
-from .restapis import get_dealers_from_cf, get_dealer_by_id
+from .restapis import get_dealers_from_cf, get_dealer_by_state
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from datetime import datetime
@@ -130,10 +130,10 @@ def get_dealer_details(request,state):
         # Concat all dealer's short name
         #dealer_names = ' '.join([dealer.short_name for dealer in dealerships])
 
-        #for dealer in dealerships:
-        #    dealers.append(dealer)
+        for dealer in dealerByState:
+            dealers.append(dealer.getAllData)
         # Return a list of dealer short name
-        context["dealerByState"] = dealerByState
+        context["dealerByState"] = dealers
       
         return render(request, 'djangoapp/index.html', context)
 

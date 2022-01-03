@@ -67,8 +67,14 @@
     {% endif %}
 
     {% if dealerByState %}
-        --
-    {% endif %}
+    <ul>
+        {% for dealer in dealerByState %}
+            <div>
+                {{ dealer.full_name }} - {{ dealer.st }}            
+            </div>
+        {% endfor %}
+        </ul>
+        {% endif %}
 
     </body>
 
