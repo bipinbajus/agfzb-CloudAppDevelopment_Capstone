@@ -64,8 +64,10 @@
         </div>
     {% endfor %}
     </ul>
-    {% else %}
-    <p>No courses are available.</p>
+    {% endif %}
+
+    {% if dealerByState %}
+        --
     {% endif %}
 
     </body>
