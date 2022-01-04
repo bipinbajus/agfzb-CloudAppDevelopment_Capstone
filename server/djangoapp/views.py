@@ -158,31 +158,32 @@ def get_dealer_details(request, dealerId):
 
     else:
         if request.method == "POST":
-            print("add review")
+            print("###")
+            print(dealerId)
             add_review(request, dealerId)
             return render(request, 'djangoapp/index.html', context)
 
-def reviewRequest(request):
-    context = {}
-    if request.method == "POST":
-        print(request)
-        return render(request, 'djangoapp/about.html', context)
-
 # Create a `add_review` view to submit a review
-def add_review(request, dealer_id):
+def add_review(request, dealerId):
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
         # Try to check if provide credential can be authenticated
         user = authenticate(username=username, password=password)
         if user is not None:
+            print("authenticated")
+            url = "https://32204ac1.us-south.apigw.appdomain.cloud/api/reviews"
+
             review = {}
+            json_payload = {}
             review["time"] = datetime.utcnow().isoformat()
             review["dealership"] = 29
             review["review"] = "This is a great car dealer"
 
             json_payload["review"] = review
 
-            response = post_request(url, json_payload, dealerId=dealer_id)
+            print(json_payload)
 
-            return response
+            response = post_request(url, json_payload, dealerId=dealerId)
+            print(response)
+            return HttpResponse("Here's the text of the web page.")
