@@ -7,13 +7,13 @@
         <div class="col-md-4 col-sm-12">
             <div class="card mb-4 sm-12 box-shadow">
             <div class="card-body">
-                <h5>{{dealer.full_name}} {{dealer.id}} {{dealer.short_name}}  
+                <h5>{{dealer.full_name}} #{{dealer.id}}  
                 </h5>
                 <p class="card-text">{{dealer.address}} {{dealer.city}} <br/>
                  {{dealer.st}} {{dealer.zip}}</p>
                 <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-primary">View Details</button>                    
+                    <a href="/djangoapp/dealer/{{dealer.id}}" class="btn btn-sm btn-primary">View Reviews</a>                    
                 </div>
                 
                 </div>
@@ -37,7 +37,7 @@
                     {{dealer.st}} {{dealer.zip}}</p>
                     <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-primary">View Details</button>                    
+                        <a href="/djangoapp/dealer/{{dealer.id}}" class="btn btn-sm btn-primary">View Reviews</a>                    
                     </div>
                     
                     </div>

@@ -162,6 +162,12 @@ def get_dealer_details(request, dealerId):
             add_review(request, dealerId)
             return render(request, 'djangoapp/index.html', context)
 
+def reviewRequest(request):
+    context = {}
+    if request.method == "POST":
+        print(request)
+        return render(request, 'djangoapp/about.html', context)
+
 # Create a `add_review` view to submit a review
 def add_review(request, dealer_id):
     if request.method == "POST":
