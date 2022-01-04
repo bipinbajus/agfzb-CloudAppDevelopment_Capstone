@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Dealership Review </a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/djangoapp">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/djangoapp/about">About Us</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/djangoapp/contact">Contact</a>
+          </li>
+       
+      </ul>
+     
+    </div>
+               
+      {% if user.is_authenticated %}
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="#">({{user.username}})</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'djangoapp:logout' %}">Logout</a>
+        </li>
+      </ul>
+      {% else %}
+        <form class="form-inline" action="{% url 'djangoapp:login' %}"  method="post">
+            {% csrf_token %}
+            <input required class="form-control mr-sm-2" type="text" name="username" value="bipin" placeholder="Username" aria-label="Username">
+            <input required class="form-control mr-sm-2" type="password" name="password" value="bipin" placeholder="Password" aria-label="Password">
+            
+            <button class="btn btn-primary my-2 my-sm-0" type="submit">Login</button>
+            <a href="/djangoapp/register" class="btn btn-outline-success my-2 my-sm-0" type="submit">SignUp</a>
+        </form>
+      {% endif %}
+  </nav>
+
+

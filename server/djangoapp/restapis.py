@@ -38,6 +38,9 @@ def get_request(url, **kwargs):
 
 # Create a `post_request` to make HTTP POST requests
 # e.g., response = requests.post(url, params=kwargs, json=payload)
+def post_request(url, json_payload, **kwargs):
+    response = requests.post(url, json=json_payload, params=kwargs)
+    return response
 
 
 # Create a get_dealers_from_cf method to get dealers from a cloud function
@@ -121,18 +124,18 @@ def get_dealer_reviews_from_cf(url, dealerId):
 # def analyze_review_sentiments(text):
 # - Call get_request() with specified arguments
 # - Get the returned sentiment label such as Positive or Negative
-def analyze_review_sentiments_notworking(text):
+# def analyze_review_sentiments_notworking(text):
 
-    url = "https://api.us-south.natural-language-understanding.watson.cloud.ibm.com/instances/e55d883e-80bf-4349-8a69-0c359736577f" 
-    api_key = "M8GHGDRHBChbRm6onwWS5f0Ixe3axf2lCVyaD-EGpvlT" 
-    version = "2020-08-01" 
-    feature = "sentiment" 
-    return_analyzed_text = True 
+#     url = "https://api.us-south.natural-language-understanding.watson.cloud.ibm.com/instances/e55d883e-80bf-4349-8a69-0c359736577f" 
+#     api_key = "M8GHGDRHBChbRm6onwWS5f0Ixe3axf2lCVyaD-EGpvlT" 
+#     version = "2020-08-01" 
+#     feature = "sentiment" 
+#     return_analyzed_text = True 
 
-    result_json = get_request(url, text=text, api_key=api_key, version=version, features=feature, 
-                                return_analyzed_text=return_analyzed_text)
+#     result_json = get_request(url, text=text, api_key=api_key, version=version, features=feature, 
+#                                 return_analyzed_text=return_analyzed_text)
 
-    return result_json
+#     return result_json
 
 
 def analyze_review_sentiments(text): 
