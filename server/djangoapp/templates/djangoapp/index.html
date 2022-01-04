@@ -1,26 +1,8 @@
 {% include "./header.html" %}
 {% include "./navigation.html" %}  
      <!--Add a dealer table here -->
-    {% if dealerships %}
-    
-    <ul>
-    {% for dealer in dealerships %}
-        <div>
-            {{ dealer }}            
-        </div>
-    {% endfor %}
-    </ul>
-    {% endif %}
 
-    {% if dealerByState %}
-        <ul>
-        {% for dealer in dealerByState %}
-            <div>
-                {{ dealer.full_name }} - {{ dealer.st }}            
-            </div>
-        {% endfor %}
-        </ul>
-        {% endif %}
+{% include "./dealership/dealerslist.html" %}  
 
     {% if dealerReviewById %}
     <h1>Reviews</h1>
