@@ -77,11 +77,20 @@
         {% endif %}
 
     {% if dealerReviewById %}
+    <h1>Reviews</h1>
     <ul>
         {% for review in dealerReviewById %}
+            <h3>{{review.dealership}}</h3>
             <div>
-                {{ review.review }} - {{ review.name }}            
+               Review: {{ review.review }}
             </div>
+            <div>
+                Reviewer: {{ review.name }}
+             </div>
+             <div>
+                Sentiment: {{ review.sentiment }}
+             </div>
+            
         {% endfor %}
         </ul>
     {% endif%}
