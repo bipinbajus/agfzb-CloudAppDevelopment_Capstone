@@ -168,9 +168,15 @@ def add_review(request, dealerId):
 
             review = {}
             json_payload = {}
-            review["time"] = datetime.utcnow().isoformat()
-            review["dealership"] = 29
-            review["review"] = "This is a great car dealer from code"
+            
+            review["dealership"] = 2
+            review["review"] = "This is a great car dealer from code 2"
+            review["name"] = "BB"
+            review["purchase"]= True
+            review["purchase_date"] = datetime.utcnow().isoformat()
+            review["car_make"]= "Audi"
+            review["car_model"]= "A6"
+            review["car_year"]= 2010
 
             json_payload["review"] = review
 
