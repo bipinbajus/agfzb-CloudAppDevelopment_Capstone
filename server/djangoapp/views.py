@@ -7,6 +7,7 @@ from .restapis import get_dealers_from_cf, get_dealer_by_state_cf, get_dealer_re
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from datetime import datetime
+from .models import CarModel
 import logging
 import json
 
@@ -146,8 +147,6 @@ def get_dealer_details(request, dealerId):
 
     else:
         if request.method == "POST":
-            print("###")
-            print(dealerId)
             add_review(request, dealerId)
             return render(request, 'djangoapp/index.html', context)
 
@@ -155,14 +154,15 @@ def get_dealer_details(request, dealerId):
 def add_review(request, dealerId):
     if request.method == "GET":
         context = {}
+
+        cars = CarModel.objects.filter(dealerId = dealerId)
+        context['cars'] = cars
+        context['dealerId'] = dealerId
         return render(request, 'djangoapp/add_review.html', context)
 
     elif request.method == "POST":
-        username = request.POST['username']
-        password = request.POST['password']
-        # Try to check if provide credential can be authenticated
-        user = authenticate(username=username, password=password)
-        if user is not None:
+        
+        if request.user.is_authenticated:
             print("authenticated")
             url = "https://32204ac1.us-south.apigw.appdomain.cloud/api/reviews"
 
@@ -170,7 +170,7 @@ def add_review(request, dealerId):
             json_payload = {}
             review["time"] = datetime.utcnow().isoformat()
             review["dealership"] = 29
-            review["review"] = "This is a great car dealer"
+            review["review"] = "This is a great car dealer from code"
 
             json_payload["review"] = review
 
@@ -178,4 +178,4 @@ def add_review(request, dealerId):
 
             response = post_request(url, json_payload, dealerId=dealerId)
             print(response)
-            return HttpResponse("Here's the text of the web page.")
+            return redirect("djangoapp:get_dealer_details", dealerId=dealerId)

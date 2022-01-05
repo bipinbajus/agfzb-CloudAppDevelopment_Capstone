@@ -3,16 +3,17 @@
 
 <div class="container">
     <h4>Add Review</h4>
-    <form method="post" action="">
+    <form method="post" action="{% url 'djangoapp:add_review' dealerId%}">
         {% csrf_token %}
         
         <div class="form-group">
             <label for="username">Enter review</label><br/>
             <textarea class="form-control" id="content" name="content" rows="2" required></textarea>
         </div>
-        <div class="form-group">
-            <label for="username">Did you purchase car from this dealer?</label>
+        <div class="form-check">
             <input class="form-check-input" type="checkbox" name="purchasecheck" id="purchasecheck">
+            <label class="form-check-label" for="purchasecheck">Did you purchase car from this dealer?</label>
+        <br/><br/>
         </div>
         <div class="form-group">
             <label for="username">Select a car</label>
@@ -24,7 +25,7 @@
         </div>
         <div class="form-group">
             <label for="username">Purchased Date</label>
-            <input class="date-own form-control" type="text" name="purchasedate" id="purchasedate">
+            <input class="date-own form-control" type="date" name="purchasedate" id="purchasedate">
         </div>
         <button type="submit" class="btn btn-primary">Add Review</button>
       </form>
