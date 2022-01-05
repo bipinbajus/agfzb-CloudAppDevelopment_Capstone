@@ -29,7 +29,6 @@ def contact(request):
     context = {}
     if request.method == "GET":
         return render(request, 'djangoapp/contact.html', context)
-        
 
 # Create a `login_request` view to handle sign in request
 def login_request(request):
@@ -141,6 +140,7 @@ def get_dealer_details(request, dealerId):
         dealerById = get_dealer_reviews_from_cf(url, dealerId)
              
         context["dealerReviewById"] = dealerById
+        context["dealerId"] = dealerId
       
         return render(request, 'djangoapp/dealer_details.html', context)
 
@@ -153,7 +153,11 @@ def get_dealer_details(request, dealerId):
 
 # Create a `add_review` view to submit a review
 def add_review(request, dealerId):
-    if request.method == "POST":
+    if request.method == "GET":
+        context = {}
+        return render(request, 'djangoapp/add_review.html', context)
+
+    elif request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
         # Try to check if provide credential can be authenticated
