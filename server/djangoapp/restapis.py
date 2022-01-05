@@ -40,7 +40,6 @@ def get_request(url, **kwargs):
 # e.g., response = requests.post(url, params=kwargs, json=payload)
 def post_request(url, json_payload, **kwargs):
     print(kwargs)
-    print(json_payload)
     print("GET from {} ".format(url))
     try:
         response = requests.post(url, json=json_payload, params=kwargs)
@@ -84,8 +83,7 @@ def get_dealer_by_state_cf(url, state):
     results = []
     # Call get_request with a URL parameter
     json_result = get_request(url,state=state)
-    print(json_result)
-    
+        
     if json_result:
         # Get the row list in JSON as dealers
         dealers = json_result["data"]
@@ -156,8 +154,12 @@ def analyze_review_sentiments(text):
     authenticator = IAMAuthenticator(api_key) 
     natural_language_understanding = NaturalLanguageUnderstandingV1(version='2021-08-01',authenticator=authenticator) 
     natural_language_understanding.set_service_url(url) 
-    response = natural_language_understanding.analyze( text=text+"hello hello hello",features=Features(sentiment=SentimentOptions(targets=[text+"hello hello hello"]))).get_result() 
-    label=json.dumps(response, indent=2) 
-    label = response['sentiment']['document']['label'] 
+    try:
+        response = natural_language_understanding.analyze( text=text,features=Features(sentiment=SentimentOptions(targets=[text]))).get_result() 
+        label=json.dumps(response, indent=2) 
+        label = response['sentiment']['document']['label'] 
+    except:
+        label = "neutral" 
+    
     return(label) 
 
