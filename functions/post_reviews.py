@@ -7,33 +7,33 @@
 # @return The output of this action, which must be a JSON object.
 #
 #
+import sys
 from cloudant.client import Cloudant
 from cloudant.error import CloudantException
 import requests
 
-
 def main(dict):
+    client = Cloudant.iam(
+        account_name = dict["COUCH_USERNAME"],
+        api_key = dict["IAM_API_KEY"],
+        connect = True,
+    )
+    
+    print(dict)
+    
+    
+    
+    my_database = client['reviews']
     
     try:
-        client = Cloudant.iam(
-            account_name=dict["COUCH_USERNAME"],
-            api_key=dict["IAM_API_KEY"],
-            connect=True,
-        )
-        
-        my_database = client['reviews']
-        
-        # Create a document using the Database API
-        my_document = my_database.create_document(dict['review'])
-        
-        # Check that the document exists in the database
+        my_document = my_database.create_document(dict["review"])
         if my_document.exists():
-            print('SUCCESS!!')
-            return {'success': 'Review Added!'}
-        
-    except CloudantException as ce:
-        print("unable to connect")
-        return {"error": ce}
-    except (requests.exceptions.RequestException, ConnectionResetError) as err:
-        print("connection error")
-        return {"error": err}
+            result = {
+                "message": "Data Inserted Successfully"
+            }
+        return result
+    except:
+        return {
+            'statusCode': 404,
+            'message': "SomethingWent Wrong"
+        }

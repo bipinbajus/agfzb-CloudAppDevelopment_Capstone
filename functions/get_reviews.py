@@ -26,7 +26,7 @@ def main(dict):
         reviewlist = []
         
         for document in my_database:
-            if document['id'] == int(dict["dealerId"]):
+            if document['dealership'] == int(dict["dealerId"]):
                 reviewlist.append(document)
         
         return {"data": reviewlist }
