@@ -1,16 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    {% load static %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
-
-</head>
-    <body>
-    <!--Add review form here -->
-    </body>
-</html>
+<div class="container">
+    <h4>Add Review</h4>
+    <form method="post" action="{% url 'djangoapp:add_review' dealer_id%}"">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="username">Name</label>
+          <input type="text" width="200" class="form-control" id="" name="username" value="">
+        </div>
+        <div class="form-group">
+            <label for="username">Password</label>
+            <input type="text" width="200" class="form-control" id="" name="password" value="">
+          </div>
+        <div class="form-group">
+            <label for="username">Enter review</label><br/>
+            <textarea  width="200" name="reviewdetails"></textarea>
+          </div>
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+</div>

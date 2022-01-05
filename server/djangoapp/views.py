@@ -106,15 +106,8 @@ def get_dealerships(request):
         url = "https://32204ac1.us-south.apigw.appdomain.cloud/api/dealership"
         # Get dealers from the URL
         dealerships = get_dealers_from_cf(url)
-        # Concat all dealer's short name
-        #dealer_names = ' '.join([dealer.short_name for dealer in dealerships])
 
-        for dealer in dealerships:
-            dealers.append(dealer)
-        # Return a list of dealer short name
-        context["dealerships"] = dealers
-
-        print(context)
+        context["dealerships"] = dealerships
         
         return render(request, 'djangoapp/index.html', context)
 
@@ -146,15 +139,10 @@ def get_dealer_details(request, dealerId):
         url = "https://32204ac1.us-south.apigw.appdomain.cloud/api/reviews"
         # Get dealers from the URL
         dealerById = get_dealer_reviews_from_cf(url, dealerId)
-        # Concat all dealer's short name
-        #dealer_names = ' '.join([dealer.short_name for dealer in dealerships])
-
-        for dealer in dealerById:
-            dealers.append(dealer.getAllData)
-        # Return a list of dealer short name
-        context["dealerReviewById"] = dealers
+             
+        context["dealerReviewById"] = dealerById
       
-        return render(request, 'djangoapp/index.html', context)
+        return render(request, 'djangoapp/dealer_details.html', context)
 
     else:
         if request.method == "POST":
