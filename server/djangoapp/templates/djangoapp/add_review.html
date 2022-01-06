@@ -3,11 +3,16 @@
 
 <div class="container">
     <h4>Add Review</h4>
+    <div class="w-50" >
     <form method="post" action="{% url 'djangoapp:add_review' dealerId%}">
         {% csrf_token %}
         
         <div class="form-group">
-            <label for="username">Enter review</label><br/>
+            <label>Enter your name</label>
+            <input class="form-control" type="text" required name="name" >
+        </div>
+        <div class="form-group">
+            <label>Enter review</label><br/>
             <textarea class="form-control" id="content" name="content" rows="2" required></textarea>
         </div>
         <div class="form-check">
@@ -16,19 +21,21 @@
         <br/><br/>
         </div>
         <div class="form-group">
-            <label for="username">Select a car</label>
-            <select name="car" id="car" class="form-select" required>
+            <label>Select a car</label>
+            <select disabled name="car" id="car" required class="form-select" id="car-select">
+                <option value="">--Select--</option>
                 {% for car in cars %}
-                    <option selected value={{car.id}}>{{car.name}}-{{car.make.name}}-{{ car.year|date:"Y" }}</option>
+                    <option value={{car.id}}>{{car.name}}-{{car.make.name}}-{{ car.year|date:"Y" }}</option>
                 {% endfor %}
            </select>
         </div>
         <div class="form-group">
-            <label for="username">Purchased Date</label>
-            <input class="date-own form-control" type="date" name="purchasedate" id="purchasedate">
+            <label for="purchasedate">Purchased Date</label>
+            <input class="date-own form-control" required disabled type="date" name="purchasedate" id="purchasedate">
         </div>
         <button type="submit" class="btn btn-primary">Add Review</button>
       </form>
+    </div>
 </div>
 
 {% include "./footer.html" %}

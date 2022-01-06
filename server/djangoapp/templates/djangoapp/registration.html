@@ -2,27 +2,28 @@
 {% include "./navigation.html" %}  
 
 <div class="container">
+    <div class="w-50">
         <h4>Register</h4>
         <form method="post" action={% url 'djangoapp:register' %}>
             {% csrf_token %}
             <div class="form-group">
               <label for="username">User Name</label>
-              <input type="text" class="form-control" id="" name="username" value="bbbb">
+              <input type="text" class="form-control" id="" name="username" value="">
             </div>
             <div class="form-group">
                 <label for="firstname">First Name</label>
-                <input type="text" class="form-control" id="" name="firstname" value="bbbb">
+                <input type="text" class="form-control" id="" name="firstname" value="">
             </div>
             <div class="form-group">
                 <label for="username">Last Name</label>
-                <input type="text" class="form-control" id="" name="lastname" value="bbbb">
+                <input type="text" class="form-control" id="" name="lastname" value="">
               </div>
             <div class="form-group">
               <label for="exampleInputPassword1">Password</label>
-              <input type="password" name="password" class="form-control" value="bbb12345" id="exampleInputPassword1" placeholder="Password">
+              <input type="password" name="password" class="form-control" value="" id="exampleInputPassword1" placeholder="Password">
             </div>
             <button type="submit" class="btn btn-primary">Sign Up</button>
           </form>
-   
+    </div>
 </div>
 {% include "./footer.html" %}

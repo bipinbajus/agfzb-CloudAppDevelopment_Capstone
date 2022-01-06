@@ -152,10 +152,12 @@ def get_dealer_details(request, dealerId):
 
 # Create a `add_review` view to submit a review
 def add_review(request, dealerId):
+    
+    #get cars
+    cars = CarModel.objects.filter(dealerId = dealerId)
+
     if request.method == "GET":
         context = {}
-
-        cars = CarModel.objects.filter(dealerId = dealerId)
         context['cars'] = cars
         context['dealerId'] = dealerId
         return render(request, 'djangoapp/add_review.html', context)
@@ -172,14 +174,26 @@ def add_review(request, dealerId):
             
             review["dealership"] = dealerId
             review["review"] = request.POST['content']
-            review["name"] = request.POST.get('name', "n/a")
-            review["purchase"] = request.POST.get('purchase', False)
-            review["purchase_date"] = datetime.utcnow().isoformat()
-            review["car_make"] = request.POST.get('car_make', "n/a")
-            review["car_model"] = request.POST.get('car_model', "n/a")
-            review["car_year"] = request.POST.get('car_year', "n/a")
+            review["name"] = request.POST['name']
+            review["purchase"] = True if 'purchasecheck' in request.POST else False
+
+            if review["purchase"] == True:            
+                date_obj = datetime.strptime(request.POST['purchasedate'], '%Y-%m-%d')
+                review["purchase_date"] = str(date_obj.strftime("%m/%d/%Y"))
+                
+                selectedCar = get_object_or_404(CarModel, pk = request.POST['car'])
+                review["car_make"] = selectedCar.make.name
+                review["car_model"] = selectedCar.name
+                review["car_year"] = int(selectedCar.year.strftime("%Y"))
+            else:
+                review["purchase_date"] = ""
+                review["car_make"] = ""
+                review["car_model"] = ""
+                review["car_year"] = ""
 
             json_payload["review"] = review
 
-            response = post_request(url, json_payload, dealerId=dealerId)
+            print(json_payload)
+
+           #response = post_request(url, json_payload, dealerId=dealerId)
             return redirect("djangoapp:get_dealer_details", dealerId=dealerId)

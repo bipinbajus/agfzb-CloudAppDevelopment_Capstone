@@ -7,9 +7,27 @@
   <script type="text/javascript">
     $(function() {
       $('#table').bootstrapTable()
+
+      
       
     })
 
+    $("#purchasecheck").on("click", function(){
+        
+        if($(this).is(':checked')){
+            $("#car").prop('required','required')
+            $("#purchasedate").prop('required','required')
+
+            $("#car").prop('disabled', false )
+            $("#purchasedate").prop('disabled', false)
+
+        }else{
+            $("#car").prop('disabled','disabled')
+            $("#purchasedate").prop('disabled','disabled')
+        }
+    })
+
+    
   </script>
   
 </body>
