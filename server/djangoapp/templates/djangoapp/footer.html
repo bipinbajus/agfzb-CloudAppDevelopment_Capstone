@@ -1,6 +1,8 @@
 <footer class="text">
+    
     <div class="container">
-      
+
+       <div class="p-5 d-flex justify-content-center"> Copyright &#169; Dealership Review </div>
       </div>
   </footer>
 
@@ -15,9 +17,6 @@
     $("#purchasecheck").on("click", function(){
         
         if($(this).is(':checked')){
-            $("#car").prop('required','required')
-            $("#purchasedate").prop('required','required')
-
             $("#car").prop('disabled', false )
             $("#purchasedate").prop('disabled', false)
 
