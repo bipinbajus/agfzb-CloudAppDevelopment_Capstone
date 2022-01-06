@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, render, redirect
 # from .models import related models
-from .restapis import get_dealers_from_cf, get_dealer_by_state_cf, get_dealer_reviews_from_cf, post_request
+from .restapis import get_dealers_from_cf, get_dealer_by_state_cf, get_dealer_reviews_from_cf, post_request, get_dealer_by_id
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from datetime import datetime
@@ -139,9 +139,13 @@ def get_dealer_details(request, dealerId):
         url = "https://32204ac1.us-south.apigw.appdomain.cloud/api/reviews"
         # Get dealers from the URL
         dealerById = get_dealer_reviews_from_cf(url, dealerId)
-             
+
+        dealershipurl = "https://32204ac1.us-south.apigw.appdomain.cloud/api/dealership"
+        dealerDetailsById = get_dealer_by_id(dealershipurl, dealerId)   
+
         context["dealerReviewById"] = dealerById
         context["dealerId"] = dealerId
+        context["dealerDetails"] = dealerDetailsById[0]['doc']
       
         return render(request, 'djangoapp/dealer_details.html', context)
 
@@ -158,8 +162,13 @@ def add_review(request, dealerId):
 
     if request.method == "GET":
         context = {}
+
+        dealershipurl = "https://32204ac1.us-south.apigw.appdomain.cloud/api/dealership"
+        dealerDetailsById = get_dealer_by_id(dealershipurl, dealerId) 
+
         context['cars'] = cars
         context['dealerId'] = dealerId
+        context["dealerDetails"] = dealerDetailsById[0]['doc']
         return render(request, 'djangoapp/add_review.html', context)
 
     elif request.method == "POST":

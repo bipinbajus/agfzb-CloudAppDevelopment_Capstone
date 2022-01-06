@@ -2,7 +2,7 @@
 {% include "./navigation.html" %}  
 
 <div class="container">
-    <h4>Add Review</h4>
+    <h4>Add Review for Dealer: {{dealerDetails.full_name}}</h4>
     <div class="w-50" >
     <form method="post" action="{% url 'djangoapp:add_review' dealerId%}">
         {% csrf_token %}

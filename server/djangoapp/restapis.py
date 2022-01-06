@@ -101,6 +101,21 @@ def get_dealer_by_state_cf(url, state):
            
     return results
 
+
+# Get dealer by state
+def get_dealer_by_id(url, dealerId):
+    result = {}
+    # Call get_request with a URL parameter
+    json_result = get_request(url,id=dealerId)
+        
+    if json_result:
+        # Get the row list in JSON as dealers
+        result = json_result["data"]
+        
+    return result
+
+
+
 # Create a get_dealer_reviews_from_cf method to get reviews by dealer id from a cloud function
 # def get_dealer_by_id_from_cf(url, dealerId):
 # - Call get_request() with specified arguments

@@ -2,7 +2,7 @@
 {% include "./navigation.html" %}  
 
 <div class="container">
-    <h4>Reviews </h4> 
+    <h4>Reviews of Dealer: {{dealerDetails.full_name}}</h4> 
     <div class="text-right">
         {% if user.is_authenticated %} 
             <a href="{% url 'djangoapp:add_review' dealerId %}">Add Review</a>
