@@ -102,11 +102,11 @@ def get_dealer_by_state_cf(url, state):
     return results
 
 
-# Get dealer by state
+# Get dealer by dealerId
 def get_dealer_by_id(url, dealerId):
     result = {}
     # Call get_request with a URL parameter
-    json_result = get_request(url,id=dealerId)
+    json_result = get_request(url,dealerId=dealerId)
         
     if json_result:
         # Get the row list in JSON as dealers

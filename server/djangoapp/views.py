@@ -204,5 +204,5 @@ def add_review(request, dealerId):
 
             print(json_payload)
 
-           #response = post_request(url, json_payload, dealerId=dealerId)
+            response = post_request(url, json_payload, dealerId=dealerId)
             return redirect("djangoapp:get_dealer_details", dealerId=dealerId)
